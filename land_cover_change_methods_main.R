@@ -189,7 +189,8 @@ test <- run_ltm(change1=r$ch,
                 yvr=14, #label?
                 ratio=0.7, #training testing ratio?
                 K=3, #?
-               sampling_name=splitdt)#sampling method/strategy? # Note that a function is passed here!!!
+               sampling_name=splitdt)#sampling method/strategy? # Note that a function is passed here!!!; 
+# "sampling_name" is the option for sampling strategy (simple random sampling; stratified random sampling; classified random sampling, ...)
 
 results_mus_RS = replicate(N, run_ltm(r$ch, r$no_ch, 6:11, length(6:11), 14, 0.7, 3, splitdt))
 results_mus_SR_eqP = replicate(N, run_ltm(r$ch, r$no_ch, 6:11, length(6:11), 14, 0.7, 3, stratified_eqP))
@@ -204,11 +205,11 @@ model_opt <- "logistic"
 
 results_logistic_obj <- run_land_change_models(change1=r$ch, 
                        no_change1=r$no_ch, 
-                       xvr=6:11,  #covariates
-                       m=length(6:11), #?
-                       yvr=14, #label?
-                       ratio=0.7, #training testing ratio?
-                       K=3, #?
+                       xvr=6:11,  #covariates  # these are the indices for the outcome variable  
+                       m=length(6:11), #?      # this is the size of the input variables 
+                       yvr=14, #label?         # this is the index for the outcome variable 
+                       ratio=0.7,              #training testing ratio?
+                       K=3, #? # this is not used..., we have to delete this parameter, ... i have used it in the EMS-paper...
                        sampling_name=splitdt, #sampling method/strategy? # Note that a function is passed here!!!
                        model_opt=model_opt,
                        data_df=NULL,
